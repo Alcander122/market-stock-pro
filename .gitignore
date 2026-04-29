@@ -1,2 +1,21 @@
-**/node_modules
-**/dist
+# --- GLOBAL ---
+node_modules/
+.DS_Store
+dist/
+build/
+.env
+*.log
+
+# --- CLIENT (Angular) ---
+Cliente/.angular/
+Cliente/dist/
+Cliente/node_modules/
+Cliente/.editorconfig
+Cliente/.vscode/
+
+# --- SERVER (NestJS) ---
+Server/node_modules/
+Server/dist/
+Server/.env
+Server/test/
+Server/thumbnails/
