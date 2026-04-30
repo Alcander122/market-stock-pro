@@ -1,0 +1,191 @@
+/* Contenedor que oscurece el fondo */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    /* Asegura que ocupe todo el ancho visual */
+    height: 100vh;
+    /* Asegura que ocupe todo el alto visual */
+    background: rgba(255, 255, 255, 0.2);
+    /* Fondo casi transparente */
+    backdrop-filter: blur(8px);
+    /* Efecto de desenfoque muy moderno */
+    display: flex;
+    justify-content: center;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Centrado vertical */
+    z-index: 9999;
+    /* Por encima de todo */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.form-container {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    /* Tamaño ideal para móvil y desktop */
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+
+    /* Importante para que no se vea "corrido" */
+    margin: 0 auto;
+    position: relative;
+
+    /* Animación de entrada */
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+h2 {
+    color: #1b5e20;
+    margin: 0 0 20px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.field {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.field label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.field input,
+.field select {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: #2e7d32;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+button {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.btn-cancel {
+    background: #f5f5f5;
+    color: #616161;
+}
+
+.btn-cancel:hover {
+    background: #eeeeee;
+}
+
+.btn-save {
+    background: #2e7d32;
+    color: white;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
+}
+
+.btn-save:hover {
+    background: #1b5e20;
+    transform: translateY(-1px);
+}
+
+.btn-save:disabled {
+    background: #a5d6a7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.field input,
+.field select {
+    width: 100%;
+    box-sizing: border-box;
+    /* Crucial para que el padding no los mueva a la derecha */
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        /* Apilados en móvil */
+        gap: 0;
+    }
+
+    .actions {
+        flex-direction: column-reverse;
+        /* Guardar queda arriba para facilitar pulgar */
+    }
+
+    button {
+        width: 100%;
+        max-width: none;
+    }
+
+    .modal-overlay {
+        padding: 15px;
+    }
+
+    .form-container {
+        padding: 20px;
+        max-width: 100%;
+        /* En móviles pequeños usa el ancho disponible */
+    }
+}

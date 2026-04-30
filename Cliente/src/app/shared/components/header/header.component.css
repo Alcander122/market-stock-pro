@@ -1,0 +1,30 @@
+.main-header {
+  background: linear-gradient(135deg, #2e7d32, #1b5e20);
+  padding: 10px;
+  color: white;
+}
+
+.nav-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  position: relative;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: yellow;
+  color: black;
+  font-size: 0.7rem;
+  padding: 2px 5px;
+  border-radius: 50%;
+}

@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductosService } from '../../services/productos.service';
-import { ProductoFormComponent } from '../producto-form/producto-form.component';
+import { ProductosService } from '../../core/services/productos.service';
 import Swal from 'sweetalert2';
+import { ProductoFormComponent } from '../producto-form/producto-form.component';
 
 @Component({
     selector: 'app-dashboard',

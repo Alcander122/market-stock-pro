@@ -27,4 +27,5 @@ export class ProductosService {
         // Asegúrate de que apiUrl sea 'http://localhost:3000/api/productos'
         return this.http.post<any>(this.apiUrl, producto);
     }
+
 }

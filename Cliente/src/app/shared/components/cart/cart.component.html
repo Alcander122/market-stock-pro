@@ -1,0 +1,38 @@
+<div class="overlay" *ngIf="visible" (click)="cerrar.emit()"></div>
+
+<div class="cart" [class.open]="visible">
+
+    <div class="header">
+        <h3>Carrito</h3>
+        <button (click)="cerrar.emit()">✖</button>
+    </div>
+
+    <div *ngIf="items.length === 0">
+        Carrito vacío
+    </div>
+
+    <div class="cart-item" *ngFor="let item of items; let i = index">
+
+        <img [src]="item.imagenUrl || 'assets/no-image.png'">
+
+        <div>
+            <p>{{ item.nombre }}</p>
+
+            <div class="quantity-controls">
+                <button (click)="carritoService.disminuir(i)">−</button>
+                <span>{{ item.cantidad }}</span>
+                <button (click)="carritoService.agregar(item)">+</button>
+            </div>
+
+            <p>${{ item.precio * item.cantidad | number }}</p>
+        </div>
+
+        <button (click)="eliminar(i)">🗑️</button>
+
+    </div>
+
+    <div *ngIf="items.length > 0">
+        <strong>Total: ${{ total | number }}</strong>
+    </div>
+
+</div>

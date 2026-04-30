@@ -1,0 +1,430 @@
+:root {
+    --primary-green: #2e7d32;
+    --primary-dark: #1b5e20;
+    --secondary-accent: #ffc107;
+    --bg-page: #f8f9fa;
+}
+
+/* --- ESCUDO SUPERIOR --- */
+.top-shield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999 !important;
+    background-color: white !important;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-header {
+    background: linear-gradient(135deg, var(--primary-green), var(--primary-dark));
+    padding: 10px 15px;
+    color: white;
+}
+
+.nav-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: black !important;
+}
+
+.logo-text strong {
+    color: var(--secondary-accent);
+}
+
+/* Buscador */
+.search-mobile-row {
+    width: 100%;
+}
+
+.search-box {
+    background: white;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+}
+
+.search-box input {
+    border: none;
+    width: 100%;
+    outline: none;
+    padding: 8px;
+    color: #333 !important;
+}
+
+/* Banner y Categorías */
+.hero-banner {
+    padding: 10px 15px;
+    background: white;
+}
+
+.placeholder-img {
+    height: 100px;
+    border-radius: 15px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-img h2 {
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 0;
+    color: white;
+}
+
+.categories-section {
+    display: flex;
+    gap: 10px;
+    padding: 10px 15px;
+    overflow-x: auto;
+    background: white;
+    scrollbar-width: none;
+}
+
+.category-chip {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 50px;
+    white-space: nowrap;
+    font-weight: 600;
+    color: #555;
+}
+
+.category-chip.active {
+    background: #e8f5e9 !important;
+    border: 2px solid var(--primary-green) !important;
+    color: var(--primary-green) !important;
+}
+
+/* --- ÁREA DE PRODUCTOS --- */
+.home-container {
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    padding-top: 320px;
+    /* Ajuste para escritorio */
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 30px auto 0;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tarjetas (Diseño original restaurado) */
+.product-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary-green);
+}
+
+.product-image-wrapper {
+    width: 100%;
+    height: 160px;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.btn-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: gray;
+}
+
+.product-image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.category-pill {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    background: #e8f5e9;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+
+.product-title {
+    font-size: 0.95rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin: 5px 0 15px;
+    line-height: 1.2;
+}
+
+.price-container {
+    display: flex;
+    align-items: baseline;
+}
+
+.amount {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.add-to-cart-btn {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* --- ESTILOS CARRITO LATERAL --- */
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+}
+
+.side-cart {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background: white;
+    z-index: 10001;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.side-cart.open {
+    right: 0;
+}
+
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: 10px;
+}
+
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+.checkout-btn {
+    width: 100%;
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .home-container {
+        padding-top: 360px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .side-cart {
+        width: 100%;
+        right: -100%;
+    }
+
+    .btn-text {
+        display: none;
+    }
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Espacio entre los dos botones */
+}
+
+/* Estilo base para los botones de acción */
+.action-btn {
+    background: transparent;
+    /* Sin fondo de inicio */
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    /* Los hace circulares al pasar el mouse */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: white;
+    /* Color del icono */
+    outline: none;
+}
+
+/* Efecto al pasar el mouse (Hover) */
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    /* Un brillo suave blanco */
+    transform: scale(1.1);
+    /* Se agranda un poquito */
+}
+
+/* Efecto al hacer clic (Active) */
+.action-btn:active {
+    transform: scale(0.95);
+    /* Se encoge un poco al presionar */
+}
+
+/* Ajustes específicos para los iconos */
+.user-icon,
+.cart-icon {
+    font-size: 1.5rem;
+    /* Tamaño de los emojis */
+}
+
+/* Mantenemos el badge del carrito bien posicionado */
+.cart-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: var(--secondary-accent);
+    color: black;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    border: 1px solid var(--primary-dark);
+}
+
+/* --- RESPONSIVE MÓVIL --- */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columnas exactas */
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .product-image-wrapper {
+        height: 130px;
+    }
+
+    .product-title {
+        font-size: 0.85rem;
+    }
+
+    .amount {
+        font-size: 1rem;
+    }
+
+    /* OCULTAR TEXTO Y DEJAR SOLO EL SIGNO + */
+    .add-to-cart-btn .btn-text {
+        display: none;
+        /* Escondemos "Añadir" */
+    }
+
+    .add-to-cart-btn {
+        padding: 8px 12px;
+        border-radius: 12px;
+        min-width: 40px;
+        /* Asegura un ancho mínimo para que sea un cuadrado/rectángulo */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .add-to-cart-btn .plus-icon {
+        font-size: 1.2rem;
+        /* Hacemos el + más grande para que sea fácil tocarlo */
+        margin: 0;
+    }
+}
