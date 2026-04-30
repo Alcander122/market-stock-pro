@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductosModule } from './src/productos/productos.module';
 import { Producto } from './src/productos/entities/producto.entity'; // Importa Producto
 import { Categoria } from './src/productos/entities/categoria.entity'; // <-- Revisa que esta ruta sea correcta
+import { PedidosModule } from './src/pedidos/pedidos.module';
+import { UsuariosModule } from './src/usuarios/usuarios.module';
 
 @Module({
     imports: [
@@ -19,6 +21,8 @@ import { Categoria } from './src/productos/entities/categoria.entity'; // <-- Re
             synchronize: false,
         }),
         ProductosModule,
+        PedidosModule,
+        UsuariosModule,
     ],
 })
 export class AppModule { }
