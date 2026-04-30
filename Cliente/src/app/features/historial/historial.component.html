@@ -1,0 +1,16 @@
+<div class="historial">
+
+    <h2>Mis Compras</h2>
+
+    <div *ngFor="let pedido of pedidos" class="pedido">
+
+        <h4>Pedido #{{ pedido.id }}</h4>
+        <p>Total: ${{ pedido.total }}</p>
+
+        <div *ngFor="let item of pedido.items">
+            {{ item.producto.nombre }} x{{ item.cantidad }}
+        </div>
+
+    </div>
+
+</div>

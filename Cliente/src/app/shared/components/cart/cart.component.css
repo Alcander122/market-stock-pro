@@ -1,62 +1,148 @@
+/* 🔥 OVERLAY (fondo oscuro) */
 .overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 99998;
-    /* MUY alto */
 }
 
+/* 🛒 CONTENEDOR PRINCIPAL */
 .cart {
     position: fixed;
     top: 0;
     right: -400px;
     width: 350px;
     height: 100vh;
-    background: white;
+    background: #fff;
     z-index: 99999;
-    /* SIEMPRE encima de todo */
-    transition: right 0.3s ease;
     display: flex;
     flex-direction: column;
+    transition: right 0.3s ease;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
 }
 
+/* 🔥 CUANDO SE ABRE (DESKTOP) */
 .cart.open {
     right: 0;
 }
 
-.header,
-.footer {
+/* 🧩 HEADER */
+.header {
     padding: 15px;
-    border-bottom: 1px solid #eee;
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+/* 📦 BODY */
 .body {
     flex: 1;
     overflow-y: auto;
     padding: 10px;
 }
 
+/* 🛍️ ITEM */
 .item {
     display: flex;
     gap: 10px;
-    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
 }
 
+/* 🖼️ IMAGEN (CORREGIDO) */
 .item img {
-    width: 50px;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #f5f5f5;
 }
 
-@media(max-width:768px) {
+/* 📄 INFO */
+.item-info {
+    flex: 1;
+}
+
+/* 🏷️ NOMBRE */
+.item-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* 🔢 CONTROLES */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 5px 0;
+}
+
+.quantity-controls button {
+    background: #eee;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 💰 PRECIO */
+.item-price {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+/* 🗑️ ELIMINAR */
+.remove-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* 📊 FOOTER */
+.footer {
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* BOTÓN FINAL */
+.footer button {
+    width: 100%;
+    padding: 12px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ========================= */
+/* 📱 RESPONSIVE (MÓVIL) */
+/* ========================= */
+
+@media (max-width: 768px) {
+
     .cart {
         width: 100%;
-        bottom: 0;
+        height: 85%;
         top: auto;
-        height: 80%;
+        bottom: 0;
+        right: 0;
+
         border-radius: 20px 20px 0 0;
+
+        /* 🔥 animación tipo app */
         transform: translateY(100%);
+        transition: transform 0.3s ease;
     }
 
     .cart.open {
-        right: 0;
+        transform: translateY(0);
     }
 }
