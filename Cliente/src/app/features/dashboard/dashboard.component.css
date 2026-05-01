@@ -286,6 +286,39 @@
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         padding: 15px;
     }
+
+    .nav-layout {
+        flex-wrap: wrap;
+        /* Permite que si no caben, bajen a otra línea */
+        justify-content: center;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .logo {
+        flex: 0 0 100%;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        /* Un fondo sutil ayuda a separar visualmente */
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+
+    .welcome-text {
+        display: inline-block;
+        font-size: 0.85rem;
+        max-width: 120px;
+        /* Un poco más de espacio */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 /* --- AJUSTE RESPONSIVE (MÓVIL) --- */

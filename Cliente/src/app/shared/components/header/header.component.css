@@ -28,3 +28,49 @@ button {
   padding: 2px 5px;
   border-radius: 50%;
 }
+
+.user-logged {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px 12px;
+  border-radius: 50px;
+}
+
+.welcome-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 600px) {
+  .nav-layout {
+    flex-direction: column;
+    /* Apila el logo y las acciones si es necesario */
+    padding: 10px;
+  }
+
+  .welcome-text {
+    display: block;
+    /* Asegura que no esté oculto */
+    font-size: 0.8rem;
+    /* Un poco más pequeño para que quepa */
+    margin-right: 5px;
+    white-space: nowrap;
+    /* Evita que el nombre se parta en dos líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Si el nombre es muy largo, pone "..." */
+    max-width: 100px;
+  }
+
+  .header-actions {
+    gap: 8px;
+    /* Reduce el espacio entre iconos */
+  }
+}
