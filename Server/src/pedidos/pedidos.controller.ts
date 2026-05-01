@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Patch, ParseIntPipe } from '@nestjs/common';
 import { PedidosService } from './pedidos.service';
 import { CreatePedidoDto } from './dto/create-pedido.dto';
 
@@ -10,6 +10,21 @@ export class PedidosController {
     @Post()
     crear(@Body() dto: CreatePedidoDto) {
         return this.service.crearPedido(dto);
+    }
+
+    // Para el administrador: Ver flujo global
+    @Get('admin/todos')
+    obtenerTodos() {
+        return this.service.obtenerTodosParaAdmin();
+    }
+
+    // Para el administrador: Cambiar estado del pedido
+    @Patch(':id/estado')
+    actualizarEstado(
+        @Param('id', ParseIntPipe) id: number,
+        @Body('nuevoEstado') nuevoEstado: string
+    ) {
+        return this.service.actualizarEstado(id, nuevoEstado);
     }
 
     @Get('usuario/:id')

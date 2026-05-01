@@ -9,22 +9,31 @@ import {
 import { PedidoItem } from '../entities/pedido-item.entity';
 import { Usuario } from '../../usuarios/entities/usuario.entity';
 
+// Estados válidos para el flujo de la tienda
+export enum EstadoPedido {
+    PENDIENTE = 'PENDIENTE',
+    PREPARANDO = 'PREPARANDO',
+    ENVIADO = 'ENVIADO',
+    ENTREGADO = 'ENTREGADO',
+    CANCELADO = 'CANCELADO'
+}
+
 @Entity('pedidos')
 export class Pedido {
-
     @PrimaryGeneratedColumn()
     id: number;
 
     @ManyToOne(() => Usuario)
     @JoinColumn({ name: 'usuario_id' })
     usuario: Usuario;
-    /*@Column({ name: 'usuario_id' })
-    usuarioId: number;*/
 
     @Column({ type: 'decimal' })
     total: number;
 
-    @Column()
+    @Column({
+        type: 'varchar',
+        default: EstadoPedido.PENDIENTE // Estado inicial automático
+    })
     estado: string;
 
     @Column({ name: 'metodo_pago' })
