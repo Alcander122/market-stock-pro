@@ -1,5 +1,6 @@
+// src/productos/entities/producto.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Categoria } from '../../productos/entities/categoria.entity'; // <-- Revisa que esta ruta sea correcta
+import { Categoria } from './categoria.entity'; // 👈 Usa ruta relativa directa si están en la misma carpeta
 
 @Entity('productos')
 export class Producto {
@@ -9,10 +10,10 @@ export class Producto {
   @Column()
   nombre: string;
 
-  // ESTO ES LO QUE FALTA: Definir la relación
-  @ManyToOne(() => Categoria)
-  @JoinColumn({ name: 'categoria_id' }) // Mapea la columna categoria_id de tu DB
-  categoria: Categoria; // <--- Ahora el Service sí encontrará esta propiedad
+  // Usa una función de flecha para evitar problemas de carga
+  @ManyToOne(() => Categoria, (categoria) => categoria.productos)
+  @JoinColumn({ name: 'categoria_id' })
+  categoria: Categoria;
 
   @Column({ name: 'precio_referencia', type: 'decimal' })
   precioReferencia: number;
@@ -25,7 +26,7 @@ export class Producto {
 
   @Column({ nullable: true })
   descripcion: string;
-  // AGREGA ESTO: Mapeo de la columna de imagen
+
   @Column({ name: 'imagen_url', nullable: true })
   imagenUrl: string;
 }

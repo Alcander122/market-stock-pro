@@ -1,15 +1,18 @@
+// src/productos/productos.module.ts
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm'; // Importar esto
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductosService } from './productos.service';
 import { ProductosController } from './productos.controller';
-import { Producto } from './entities/producto.entity'; // Importar tu entidad
+import { Producto } from './entities/producto.entity';
+import { Categoria } from './entities/categoria.entity';
 
 @Module({
   imports: [
-    // Esto "registra" la tabla de productos para que el servicio pueda usarla
-    TypeOrmModule.forFeature([Producto])
+    // 🔥 Registra ambas para que la metadata de la relación sea visible
+    TypeOrmModule.forFeature([Producto, Categoria])
   ],
   controllers: [ProductosController],
   providers: [ProductosService],
+  exports: [TypeOrmModule]
 })
 export class ProductosModule { }
