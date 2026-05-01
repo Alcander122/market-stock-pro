@@ -1,7 +1,6 @@
 <div class="historial-container">
     <div class="header-historial">
         <h2>Mis Compras</h2>
-        <!-- 💡 Mover el botón aquí lo hace visible SIEMPRE -->
         <button class="btn-secondary" routerLink="/productos">
             ← Volver a la tienda
         </button>
@@ -12,7 +11,7 @@
         <p>Buscando tus compras...</p>
     </div>
 
-    <!-- 2. Si NO hay pedidos (Solo el texto de aviso) -->
+    <!-- 2. Si NO hay pedidos -->
     <div *ngIf="!cargando && pedidos.length === 0" class="empty-state">
         <p>Aún no tienes pedidos registrados.</p>
     </div>
@@ -21,7 +20,13 @@
     <div class="grid-pedidos" *ngIf="!cargando && pedidos.length > 0">
         <div *ngFor="let pedido of pedidos" class="pedido-card">
             <div class="pedido-header">
-                <p><strong>Pedido #{{ pedido.id }}</strong></p>
+                <div class="pedido-id-section">
+                    <p><strong>Pedido #{{ pedido.id }}</strong></p>
+                    <!-- 💡 ESTADO AÑADIDO: Se actualiza solo cuando cambias en el Admin -->
+                    <span class="badge-estado" [ngClass]="pedido.estado.toLowerCase()">
+                        {{ pedido.estado }}
+                    </span>
+                </div>
                 <p class="total-text">Total: {{ pedido.total | currency }}</p>
             </div>
 
@@ -29,13 +34,13 @@
 
             <div class="pedido-items-detalle">
                 <p class="detalle-titulo">Detalle de productos:</p>
-                <!-- Usamos las relaciones configuradas en PedidosService -->
                 <div *ngFor="let item of pedido.items" class="item-fila">
                     <span>{{ item.producto.nombre }}</span>
-                    <span>x{{ item.cantidad }}</span>
+                    <span class="item-cantidad">x{{ item.cantidad }}</span>
                     <span>{{ (item.precioUnitario * item.cantidad) | currency }}</span>
                 </div>
             </div>
+
             <div class="pedido-footer">
                 <span>Realizado el: {{ pedido.creadoAt | date:'shortDate' }}</span>
             </div>

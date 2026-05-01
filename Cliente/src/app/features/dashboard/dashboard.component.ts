@@ -1,39 +1,71 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductosService } from '../../core/services/productos.service';
+import { PedidosService } from '../../core/services/pedidos.service';
 import Swal from 'sweetalert2';
 import { ProductoFormComponent } from '../producto-form/producto-form.component';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [CommonModule, ProductoFormComponent], // Importamos el nuevo componente
+    imports: [CommonModule, ProductoFormComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+    // Inyección de servicios
     private productosService = inject(ProductosService);
+    private pedidosService = inject(PedidosService);
     private cdr = inject(ChangeDetectorRef);
 
+    // Control de Vistas
+    vistaActual: 'productos' | 'pedidos' = 'productos';
+
+    // Datos de Inventario
     listaProductos: any[] = [];
     productosFiltrados: any[] = [];
-
-    // Variables de control para el Modal Separado
     mostrarFormulario = false;
     productoAEditar: any = null;
 
+    // Datos de Pedidos
+    listaPedidos: any[] = [];
+    estadosPedido = ['PENDIENTE', 'PREPARANDO', 'ENVIADO', 'ENTREGADO', 'CANCELADO'];
+
     ngOnInit() {
         this.cargarProductos();
+        this.cargarPedidos();
     }
+
+    // Alternar entre pestañas de Inventario y Pedidos
+    cambiarVista(vista: 'productos' | 'pedidos') {
+        this.vistaActual = vista;
+        if (vista === 'pedidos') {
+            this.cargarPedidos();
+        } else {
+            this.cargarProductos();
+        }
+    }
+
+    // --- LÓGICA DE PRODUCTOS ---
 
     cargarProductos() {
         this.productosService.obtenerProductos().subscribe({
             next: (datos) => {
+                // 1. Guardamos la lista completa
                 this.listaProductos = datos;
-                this.productosFiltrados = datos;
+
+                // 2. IMPORTANTE: Asignamos los datos a la lista que recorre el HTML
+                // Si productosFiltrados está vacío, no verás nada hasta filtrar.
+                this.productosFiltrados = [...datos];
+
+                // 3. Forzamos la detección de cambios para pintar las cards
                 this.cdr.detectChanges();
+
+                console.log('📦 Productos cargados con éxito');
             },
-            error: (err) => console.error('❌ Error:', err)
+            error: (err) => {
+                console.error('❌ Error al cargar productos:', err);
+            }
         });
     }
 
@@ -49,15 +81,13 @@ export class DashboardComponent implements OnInit {
         this.cdr.detectChanges();
     }
 
-    // --- LÓGICA DEL NUEVO MODAL SEPARADO ---
-
     abrirFormularioCrear() {
-        this.productoAEditar = null; // Indica que es creación
+        this.productoAEditar = null;
         this.mostrarFormulario = true;
     }
 
     editarProducto(producto: any) {
-        this.productoAEditar = producto; // Pasa los datos para edición
+        this.productoAEditar = producto;
         this.mostrarFormulario = true;
     }
 
@@ -67,26 +97,22 @@ export class DashboardComponent implements OnInit {
     }
 
     procesarGuardado(evento: { datos: any, archivo: File | null }) {
-        // 1. LIMPIEZA TOTAL: Solo enviamos lo que el DTO espera
         const datosParaEnviar = {
             nombre: evento.datos.nombre,
             precioReferencia: Number(evento.datos.precioReferencia),
             stock: Number(evento.datos.stock),
             unidadMedida: evento.datos.unidadMedida || 'UNIDAD',
-            // ENVIAMOS EL ID DIRECTO, NO UN OBJETO
             categoriaId: Number(evento.datos.categoriaId)
         };
 
-        console.log('Enviando al servidor:', datosParaEnviar);
-
         if (this.productoAEditar) {
-            // LÓGICA DE UPDATE
+            // Actualizar producto existente
             this.productosService.actualizarProducto(this.productoAEditar.id, datosParaEnviar).subscribe({
                 next: () => {
                     if (evento.archivo) {
                         this.subirImagenYFinalizar(this.productoAEditar.id, evento.archivo);
                     } else {
-                        this.finalizarExito('Producto actualizado');
+                        this.finalizarExito('Producto actualizado correctamente');
                     }
                 },
                 error: (err) => {
@@ -95,19 +121,18 @@ export class DashboardComponent implements OnInit {
                 }
             });
         } else {
-            // LÓGICA DE CREATE
+            // Crear nuevo producto
             this.productosService.crearProducto(datosParaEnviar).subscribe({
                 next: (nuevo: any) => {
                     if (evento.archivo) {
                         this.subirImagenYFinalizar(nuevo.id, evento.archivo);
                     } else {
-                        this.finalizarExito('Producto creado');
+                        this.finalizarExito('Producto creado correctamente');
                     }
                 },
                 error: (err) => {
-                    // Manejo de errores de validación de NestJS
                     const msj = Array.isArray(err.error.message) ? err.error.message.join(', ') : err.error.message;
-                    Swal.fire('Error de validación', msj, 'error');
+                    Swal.fire('Error de creación', msj, 'error');
                 }
             });
         }
@@ -117,7 +142,8 @@ export class DashboardComponent implements OnInit {
         const formData = new FormData();
         formData.append('file', archivo);
         this.productosService.subirImagen(id, formData).subscribe({
-            next: () => this.finalizarExito('Producto e imagen guardados')
+            next: () => this.finalizarExito('Producto e imagen guardados con éxito'),
+            error: () => Swal.fire('Aviso', 'Producto guardado pero hubo un error con la imagen', 'warning')
         });
     }
 
@@ -125,5 +151,38 @@ export class DashboardComponent implements OnInit {
         this.cerrarFormulario();
         this.cargarProductos();
         Swal.fire('¡Éxito!', mensaje, 'success');
+    }
+
+
+    // --- LÓGICA DE PEDIDOS ---
+
+    cargarPedidos() {
+        this.pedidosService.obtenerTodosParaAdmin().subscribe({
+            next: (datos) => {
+                this.listaPedidos = datos;
+                this.cdr.detectChanges();
+            },
+            error: (err) => console.error('❌ Error al cargar pedidos:', err)
+        });
+    }
+
+    cambiarEstadoPedido(id: number, event: any) {
+        const nuevoEstado = event.target.value;
+        this.pedidosService.actualizarEstado(id, nuevoEstado).subscribe({
+            next: () => {
+                Swal.fire({
+                    title: 'Estado Actualizado',
+                    text: `El pedido #${id} ahora está ${nuevoEstado}`,
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                this.cargarPedidos(); // Refrescar tabla
+            },
+            error: (err) => {
+                console.error('Error al cambiar estado:', err);
+                Swal.fire('Error', 'No se pudo actualizar el estado del pedido', 'error');
+            }
+        });
     }
 }

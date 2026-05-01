@@ -43,11 +43,21 @@ export class Home implements OnInit {
   }
 
   cargarProductos() {
-    this.productoService.obtenerProductos().subscribe(data => {
-      this.productos = data;
-      this.productosFiltrados = data;
+    this.productoService.obtenerProductos().subscribe({
+      next: (data) => {
+        this.productos = data;
+        this.productosFiltrados = data;
+
+        // 💡 DEBE IR AQUÍ ADENTRO: 
+        // Avisa a Angular que ya llegaron los datos y debe dibujar las cards.
+        this.cdr.detectChanges();
+
+        console.log('Productos cargados en Home:', this.productosFiltrados);
+      },
+      error: (err) => {
+        console.error('Error al cargar productos en Home:', err);
+      }
     });
-    this.cdr.detectChanges();
   }
 
   filtrarPor(idCategoria: number) {

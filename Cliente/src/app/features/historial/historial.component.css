@@ -22,25 +22,28 @@
 }
 
 /* Botón Volver a la Tienda */
-.btn-volver, .btn-secondary {
-    background-color: #2e7d32; /* Verde Fruver */
+.btn-volver,
+.btn-secondary {
+    background-color: #2e7d32;
+    /* Verde Fruver */
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 25px; /* Más redondeado para un look moderno */
+    border-radius: 25px;
     cursor: pointer;
     font-weight: 600;
     text-decoration: none;
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.btn-volver:hover, .btn-secondary:hover {
+.btn-volver:hover,
+.btn-secondary:hover {
     background-color: #1b5e20;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Grid de Pedidos Responsivo */
@@ -66,22 +69,71 @@
     transform: scale(1.01);
 }
 
-/* Cabecera de la Tarjeta */
+/* Cabecera de la Tarjeta y Estados */
 .pedido-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     font-weight: bold;
-    font-size: 1.1rem;
     margin-bottom: 10px;
 }
 
-.total-text, .pedido-total {
-    color: #2e7d32;
-    font-size: 1.2rem;
+.pedido-id-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-/* Sección de Detalle de Productos */
+.pedido-id-section p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* 🏷️ Estilos para los Badges de Estado */
+.badge-estado {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    width: fit-content;
+}
+
+/* Colores dinámicos por estado */
+.badge-estado.pendiente {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.badge-estado.preparando {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.badge-estado.enviado {
+    background: #e8eaf6;
+    color: #3f51b5;
+}
+
+.badge-estado.entregado {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.badge-estado.cancelado {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.total-text,
+.pedido-total {
+    color: #2e7d32;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Detalle de Productos */
 .pedido-items-detalle {
     margin-top: 10px;
 }
@@ -95,8 +147,7 @@
     letter-spacing: 0.5px;
 }
 
-/* Filas de Productos */
-.item-fila, .lista-items li {
+.item-fila {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -118,7 +169,7 @@
     font-weight: bold;
 }
 
-/* Footer de la Tarjeta (Fechas/Estado) */
+/* Footer de la Tarjeta */
 .pedido-footer {
     margin-top: 15px;
     padding-top: 10px;
@@ -128,29 +179,23 @@
     text-align: right;
 }
 
-/* Estado Vacío */
 .empty-state {
     text-align: center;
     padding: 50px 20px;
     color: #666;
 }
 
-/* --- Ajustes Responsivos (Celulares) --- */
+/* --- Ajustes Responsivos --- */
 @media (max-width: 600px) {
     .header-historial {
         flex-direction: column;
         gap: 15px;
         text-align: center;
-        padding-bottom: 20px;
     }
 
-    .header-historial h2 {
-        font-size: 1.5rem;
-    }
-
-    .btn-volver, .btn-secondary {
+    .btn-volver,
+    .btn-secondary {
         width: 100%;
-        justify-content: center;
     }
 
     .grid-pedidos {
@@ -160,7 +205,7 @@
     .pedido-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 5px;
+        gap: 10px;
     }
 
     .pedido-total {

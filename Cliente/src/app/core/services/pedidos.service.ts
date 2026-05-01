@@ -20,4 +20,13 @@ export class PedidosService {
     obtenerHistorial(usuarioId: number): Observable<any> {
         return this.http.get(`${this.api}/usuario/${usuarioId}`);
     }
+    // 📋 Obtener todos los pedidos del Fruver
+    obtenerTodosParaAdmin(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.api}/admin/todos`);
+    }
+
+    // 🔄 Cambiar estado (Pendiente -> Preparando -> etc)
+    actualizarEstado(pedidoId: number, nuevoEstado: string): Observable<any> {
+        return this.http.patch(`${this.api}/${pedidoId}/estado`, { nuevoEstado });
+    }
 }
