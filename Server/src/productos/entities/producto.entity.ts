@@ -1,6 +1,5 @@
-// src/productos/entities/producto.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Categoria } from './categoria.entity'; // 👈 Usa ruta relativa directa si están en la misma carpeta
+import { Categoria } from './categoria.entity';
 
 @Entity('productos')
 export class Producto {
@@ -10,7 +9,6 @@ export class Producto {
   @Column()
   nombre: string;
 
-  // Usa una función de flecha para evitar problemas de carga
   @ManyToOne(() => Categoria, (categoria) => categoria.productos)
   @JoinColumn({ name: 'categoria_id' })
   categoria: Categoria;
@@ -21,8 +19,10 @@ export class Producto {
   @Column({ name: 'unidad_medida' })
   unidadMedida: string;
 
-  @Column({ type: 'decimal', name: 'stock_actual' })
-  stockActual: number;
+  // 💡 Mantenemos solo una propiedad mapeada a 'stock_actual'
+  // Usamos el nombre 'stock' para que coincida con tu lógica del servicio
+  @Column({ name: 'stock_actual', type: 'numeric', precision: 10, scale: 2, default: 0 })
+  stock: number;
 
   @Column({ nullable: true })
   descripcion: string;
