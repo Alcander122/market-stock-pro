@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
         const datosParaEnviar = {
             nombre: evento.datos.nombre,
             precioReferencia: Number(evento.datos.precioReferencia),
-            stockActual: Number(evento.datos.stockActual),
+            stock: Number(evento.datos.stock),
             unidadMedida: evento.datos.unidadMedida || 'UNIDAD',
             // ENVIAMOS EL ID DIRECTO, NO UN OBJETO
             categoriaId: Number(evento.datos.categoriaId)

@@ -23,7 +23,7 @@ export class ProductoFormComponent implements OnInit {
         this.productoForm = this.fb.group({
             nombre: [this.productoOriginal?.nombre || '', Validators.required],
             precioReferencia: [this.productoOriginal?.precioReferencia || 0, Validators.required],
-            stockActual: [this.productoOriginal?.stockActual || 0, Validators.required],
+            stock: [this.productoOriginal?.stock || 0, Validators.required],
             unidadMedida: [this.productoOriginal?.unidadMedida || 'LB', Validators.required],
             categoriaId: [this.productoOriginal?.categoria?.id || 1, Validators.required] // <-- ESTE NOMBRE
         });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductosService } from '../../core/services/productos.service';
 import { CarritoService } from '../../core/services/carrito.service';
@@ -13,6 +13,8 @@ import { HeaderComponent } from '../../shared/components/header/header.component
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
 
   productos: any[] = [];
   productosFiltrados: any[] = [];
@@ -32,7 +34,8 @@ export class Home implements OnInit {
 
   constructor(
     private productoService: ProductosService,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
+
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +47,7 @@ export class Home implements OnInit {
       this.productos = data;
       this.productosFiltrados = data;
     });
+    this.cdr.detectChanges();
   }
 
   filtrarPor(idCategoria: number) {
@@ -57,6 +61,7 @@ export class Home implements OnInit {
         return Number(pCatId) === Number(idCategoria);
       });
     }
+    this.cdr.detectChanges();
   }
 
   buscarProducto(event: any) {

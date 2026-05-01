@@ -52,7 +52,7 @@
                 <div class="stats">
                     <p class="stock-container">
                         <strong>Stock:</strong>
-                        <span class="stock-value">{{ producto.stockActual | number:'1.0-0' }}</span>
+                        <span class="stock-value">{{ producto.stock | number:'1.0-0' }}</span>
                         <span class="unit">{{ producto.unidadMedida }}</span>
                     </p>
                     <p class="price">{{ producto.precioReferencia | currency:'USD':'symbol':'1.0-0' }}</p>

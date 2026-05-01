@@ -1,0 +1,169 @@
+/* Contenedor Principal */
+.historial-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header con Título y Botón */
+.header-historial {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+
+.header-historial h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+/* Botón Volver a la Tienda */
+.btn-volver, .btn-secondary {
+    background-color: #2e7d32; /* Verde Fruver */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px; /* Más redondeado para un look moderno */
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-volver:hover, .btn-secondary:hover {
+    background-color: #1b5e20;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Grid de Pedidos Responsivo */
+.grid-pedidos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de Pedido Individual */
+.pedido-card {
+    background: #fff;
+    border-left: 6px solid #2e7d32;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.pedido-card:hover {
+    transform: scale(1.01);
+}
+
+/* Cabecera de la Tarjeta */
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.total-text, .pedido-total {
+    color: #2e7d32;
+    font-size: 1.2rem;
+}
+
+/* Sección de Detalle de Productos */
+.pedido-items-detalle {
+    margin-top: 10px;
+}
+
+.detalle-titulo {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Filas de Productos */
+.item-fila, .lista-items li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.item-fila:last-child {
+    border-bottom: none;
+}
+
+.item-cantidad {
+    background: #f1f8e9;
+    color: #2e7d32;
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Footer de la Tarjeta (Fechas/Estado) */
+.pedido-footer {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #f5f5f5;
+    color: #888;
+    font-size: 0.85rem;
+    text-align: right;
+}
+
+/* Estado Vacío */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #666;
+}
+
+/* --- Ajustes Responsivos (Celulares) --- */
+@media (max-width: 600px) {
+    .header-historial {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .header-historial h2 {
+        font-size: 1.5rem;
+    }
+
+    .btn-volver, .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .grid-pedidos {
+        grid-template-columns: 1fr;
+    }
+
+    .pedido-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .pedido-total {
+        align-self: flex-end;
+    }
+}
