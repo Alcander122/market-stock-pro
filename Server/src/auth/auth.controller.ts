@@ -1,6 +1,5 @@
 import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from './auth.service';
-
+import { AuthService } from './auth.service'; // ✅ Importación de clase estándar
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
@@ -11,6 +10,11 @@ export class AuthController {
         if (!user) {
             throw new UnauthorizedException('Usuario o contraseña incorrectos');
         }
-        return user;
+        return this.authService.login(user);
+    }
+
+    @Post('register')
+    async register(@Body() registerDto: any) {
+        return this.authService.register(registerDto);
     }
 }

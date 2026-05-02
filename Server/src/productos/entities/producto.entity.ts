@@ -29,4 +29,8 @@ export class Producto {
 
   @Column({ name: 'imagen_url', nullable: true })
   imagenUrl: string;
+
+  // En Server/src/productos/entities/producto.entity.ts
+  @Column({ type: 'jsonb', nullable: true, default: {} })
+  metadata: any;
 }

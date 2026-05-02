@@ -1,5 +1,5 @@
 // create-producto.dto.ts
-import { IsNumber, IsString, IsOptional } from 'class-validator';
+import { IsNumber, IsString, IsOptional, IsObject } from 'class-validator';
 
 export class CreateProductoDto {
     @IsString()
@@ -20,4 +20,8 @@ export class CreateProductoDto {
 
     @IsNumber()
     categoriaId: number;
+
+    @IsOptional()
+    @IsObject()
+    metadata?: Record<string, any>;
 }

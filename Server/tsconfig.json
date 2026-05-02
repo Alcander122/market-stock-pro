@@ -18,7 +18,10 @@
         "noFallthroughCasesInSwitch": false,
         "ignoreDeprecations": "5.0",
         /* AGREGA ESTA LÍNEA */
-        "types": ["node"]
+        "types": [
+            "node",
+            "multer"
+        ]
     },
     "exclude": [
         "node_modules",
