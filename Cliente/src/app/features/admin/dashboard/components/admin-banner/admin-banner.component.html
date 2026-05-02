@@ -1,0 +1,37 @@
+<div class="admin-banner">
+    <div class="banner-content">
+
+        <div class="banner-text">
+            <h1>Panel Administrativo</h1>
+            <p>
+                {{ vistaActual === 'productos'
+                ? 'Gestión de Inventario'
+                : 'Gestión de Pedidos' }}
+            </p>
+        </div>
+
+        <div class="banner-actions">
+            <button class="btn-tab" [class.active]="vistaActual === 'productos'"
+                (click)="cambiarVista.emit('productos')">
+                📦 Productos
+            </button>
+
+            <button class="btn-tab" [class.active]="vistaActual === 'pedidos'" (click)="cambiarVista.emit('pedidos')">
+                🛒 Pedidos
+            </button>
+
+            <button class="btn-tab" [class.active]="vistaActual === 'usuarios'" (click)="cambiarVista.emit('usuarios')">
+                👥 Usuarios
+            </button>
+
+            <button *ngIf="vistaActual === 'productos'" class="btn-primary" (click)="crearProducto.emit()">
+                + Nuevo
+            </button>
+        </div>
+
+        <div class="banner-badge-container">
+            <div class="banner-badge">Administrador</div>
+        </div>
+
+    </div>
+</div>

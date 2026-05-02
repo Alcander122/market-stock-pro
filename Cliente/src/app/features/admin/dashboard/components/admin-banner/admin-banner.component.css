@@ -1,0 +1,78 @@
+.admin-banner {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    padding: 20px 0;
+    border-radius: 0 0 20px 20px;
+}
+
+.banner-content {
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+.banner-text h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.banner-text p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-tab {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+}
+
+.btn-tab.active {
+    background: white;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: #ffc107;
+    color: #333;
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-weight: bold;
+}
+
+.banner-badge {
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+    .banner-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+
+    .banner-actions {
+        justify-content: center;
+    }
+}

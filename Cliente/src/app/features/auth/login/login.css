@@ -1,96 +1,72 @@
-.login-container {
+:host {
+    display: block;
+}
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Ocupa el 100% de la altura de la pantalla */
+    width: 100%;
+    background-color: var(--color-background);
+    padding: var(--spacing-md);
+    box-sizing: border-box;
+}
+
+.login-card {
+    width: 100%;
     max-width: 400px;
-    margin: 150px auto;
-    /* Para que no lo tape el header fijo */
-    padding: 40px;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Límite de ancho para que no se estire en tu monitor de 24" */
+    padding: 2.5rem 2rem;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--spacing-md);
 }
 
-.login-container h2 {
+.login-title {
     text-align: center;
-    color: var(--primary-dark);
+    color: var(--color-text-primary);
+    font-size: 1.75rem;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin: 0 0 var(--spacing-sm) 0;
 }
 
-.form-group input {
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.hz-input {
     width: 100%;
-    padding: 15px;
-    border: 1px solid #f0f0f0;
-    border-radius: 12px;
-    background: #fafafa;
-    outline: none;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
     font-size: 1rem;
-    transition: border 0.3s;
-}
-
-.form-group input:focus {
-    border-color: var(--primary-green);
-}
-
-.login-container input {
-    padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    background: #fafafa;
     outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
-.login-container button {
-    padding: 15px;
-    background: var(--primary-green);
-    color: black;
-    border: none;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
+.hz-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background-color: var(--color-surface);
 }
 
-.error-text {
-    color: #e74c3c;
-    font-size: 0.8rem;
-    text-align: center;
-}
-
-@media (max-width: 480px) {
-    .login-container {
-        margin: 100px 20px;
-        padding: 25px;
-    }
-}
-
-/* --- ESTILO DEL BOTÓN --- */
-.login-btn {
+.full-width {
     width: 100%;
-    padding: 15px;
-    background: var(--primary-green);
-    color: black;
-    border: none;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.login-btn:hover {
-    background: var(--primary-dark);
-     color: black;
-}
-
-.login-btn:active {
-    transform: scale(0.98);
-     color: black;
+    margin-top: 10px;
 }
 
 .error-msg {
-    color: #e74c3c;
-    font-size: 0.85rem;
+    color: #ef4444;
+    font-size: 0.9rem;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }

@@ -1,0 +1,36 @@
+<div class="admin-usuarios">
+    <div class="header-admin">
+        <h3>Gestión de Usuarios</h3>
+        <p class="text-muted">Administra los accesos y roles de los clientes.</p>
+    </div>
+
+    @if (cargando()) {
+        <div class="skeleton" style="height: 200px; border-radius: 10px;"></div>
+    } @else {
+        <div class="hz-grid">
+            @for (usuario of usuarios(); track usuario.id) {
+                <div class="usuario-card hz-card">
+                    <div class="usuario-header">
+                        <div class="avatar">{{ usuario.nombreCompleto.charAt(0).toUpperCase() }}</div>
+                        <div class="info">
+                            <h4>{{ usuario.nombreCompleto }}</h4>
+                            <p>{{ usuario.email }}</p>
+                        </div>
+                        <span class="badge" [class.admin]="usuario.rol === 'admin'">
+                            {{ usuario.rol | uppercase }}
+                        </span>
+                    </div>
+                    
+                    <hr>
+
+                    <div class="usuario-footer">
+                        <button class="btn-outline" (click)="editarRol(usuario)">Cambiar Rol</button>
+                        <button class="btn-danger" (click)="eliminarUsuario(usuario.id, usuario.nombreCompleto)">Eliminar</button>
+                    </div>
+                </div>
+            } @empty {
+                <div class="empty-state">No se encontraron usuarios.</div>
+            }
+        </div>
+    }
+</div>

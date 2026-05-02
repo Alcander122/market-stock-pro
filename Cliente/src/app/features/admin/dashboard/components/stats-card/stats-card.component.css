@@ -1,0 +1,39 @@
+.card {
+    flex: 1;
+    min-width: 120px;
+
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h4 {
+    font-size: 0.8rem;
+    color: #777;
+    margin: 0;
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+/* CONTENEDOR */
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+}
+
+/* TABLET */
+@media (min-width: 600px) {
+    .stats-container {
+        flex-direction: row;
+    }
+}

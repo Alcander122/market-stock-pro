@@ -1,0 +1,166 @@
+/* ---------- GENERAL ---------- */
+.dashboard {
+    padding: 15px;
+}
+
+/* ---------- BANNER ---------- */
+.admin-banner {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    padding: 15px;
+    border-radius: 0 0 20px 20px;
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+.banner-text h1 {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-tab {
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+}
+
+.btn-tab.active {
+    background: white;
+    color: #2e7d32;
+}
+
+.btn-primary {
+    background: #ffc107;
+    border-radius: 20px;
+    padding: 8px 15px;
+}
+
+/* ---------- PRODUCTOS ---------- */
+.filters {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+/* CARD */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-image {
+    height: 150px;
+    background: #f5f5f5;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.product-info {
+    padding: 10px;
+    text-align: center;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.btn-edit {
+    width: 100%;
+    padding: 8px;
+    background: #1976d2;
+    color: white;
+    border-radius: 8px;
+}
+
+/* ---------- PEDIDOS ---------- */
+.table-container {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 10px;
+}
+
+.badge-estado {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+}
+
+/* ---------- MODAL ---------- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (min-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .banner-content {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .dashboard {
+        padding: 30px 60px;
+    }
+}

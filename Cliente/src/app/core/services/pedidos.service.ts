@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Pedido } from '../../shared/models/pedido.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -11,22 +12,19 @@ export class PedidosService {
 
     constructor(private http: HttpClient) { }
 
-    // 🧾 Crear pedido
-    crearPedido(data: any): Observable<any> {
-        return this.http.post(this.api, data);
+    crearPedido(data: any): Observable<Pedido> {
+        return this.http.post<Pedido>(this.api, data);
     }
 
-    // 📜 Historial
-    obtenerHistorial(usuarioId: number): Observable<any> {
-        return this.http.get(`${this.api}/usuario/${usuarioId}`);
-    }
-    // 📋 Obtener todos los pedidos del Fruver
-    obtenerTodosParaAdmin(): Observable<any[]> {
-        return this.http.get<any[]>(`${this.api}/admin/todos`);
+    obtenerHistorial(usuarioId: number): Observable<Pedido[]> {
+        return this.http.get<Pedido[]>(`${this.api}/usuario/${usuarioId}`);
     }
 
-    // 🔄 Cambiar estado (Pendiente -> Preparando -> etc)
-    actualizarEstado(pedidoId: number, nuevoEstado: string): Observable<any> {
-        return this.http.patch(`${this.api}/${pedidoId}/estado`, { nuevoEstado });
+    obtenerTodosParaAdmin(): Observable<Pedido[]> {
+        return this.http.get<Pedido[]>(`${this.api}/admin/todos`);
+    }
+
+    actualizarEstado(id: number, estado: string) {
+        return this.http.patch(`${this.api}/${id}/estado`, { nuevoEstado: estado });
     }
 }

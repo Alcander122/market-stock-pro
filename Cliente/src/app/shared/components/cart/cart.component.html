@@ -1,68 +1,66 @@
-<div class="overlay" *ngIf="visible" (click)="cerrar.emit()"></div>
+@if (visible) {
+  <div class="hz-overlay" (click)="cerrar.emit()"></div>
+}
 
-<div class="cart" [class.open]="visible">
+<div class="hz-bottom-sheet cart-sheet" [class.open]="visible">
 
     <!-- HEADER -->
-    <div class="header">
-        <h3>Mi Carrito</h3>
-        <button (click)="cerrar.emit()">✖</button>
+    <div class="cart-header">
+        <h3 class="cart-title">Mi Carrito</h3>
+        <button class="cart-close-btn" (click)="cerrar.emit()">✖</button>
     </div>
 
     <!-- BODY -->
-    <div class="body">
+    <div class="cart-body">
 
-        <!-- VACÍO -->
-        <div *ngIf="items.length === 0" class="empty-cart">
-            <p>Tu carrito está vacío</p>
-        </div>
-
-        <!-- ITEMS -->
-        <div class="item" *ngFor="let item of items; let i = index">
-
-            <img [src]="item.imagenUrl || 'assets/no-image.png'">
-
-            <div class="item-info">
-
-                <p class="item-name">
-                    {{ item.nombre }}
-                </p>
-
-                <!-- CONTROLES -->
-                <div class="quantity-controls">
-                    <button (click)="carritoService.disminuir(i)">−</button>
-                    <span>{{ item.cantidad }}</span>
-                    <button (click)="carritoService.agregar(item)">+</button>
-                </div>
-
-                <!-- PRECIO -->
-                <p class="item-price">
-                    ${{ item.precio * item.cantidad | number }}
-                </p>
-
+        @if (carritoService.items().length === 0) {
+            <div class="empty-cart">
+                <p>Tu carrito está vacío</p>
             </div>
+        } @else {
+            @for (item of carritoService.items(); track item.id; let i = $index) {
+                <div class="cart-item">
+                    <img [src]="item.imagenUrl || 'assets/no-image.png'" class="cart-item-img">
 
-            <!-- ELIMINAR -->
-            <button class="remove-btn" (click)="eliminar(i)">
-                🗑️
-            </button>
+                    <div class="cart-item-info">
+                        <p class="cart-item-name">{{ item.nombre }}</p>
 
-        </div>
+                        <!-- CONTROLES -->
+                        <div class="cart-quantity-controls">
+                            <button (click)="carritoService.disminuir(i)">−</button>
+                            <span>{{ item.cantidad }}</span>
+                            <button (click)="carritoService.aumentarCantidad(i)">+</button>
+                        </div>
+
+                        <!-- PRECIO -->
+                        <p class="cart-item-price">
+                            ${{ item.precio * item.cantidad | number }}
+                        </p>
+                    </div>
+
+                    <!-- ELIMINAR -->
+                    <button class="cart-remove-btn" (click)="eliminar(i)">
+                        🗑️
+                    </button>
+                </div>
+            }
+        }
 
     </div>
 
     <!-- FOOTER -->
-    <div class="footer" *ngIf="items.length > 0">
+    @if (carritoService.items().length > 0) {
+        <div class="cart-footer">
+            <div class="cart-total-box">
+                <span>Total:</span>
+                <strong>${{ carritoService.total() | number }}</strong>
+            </div>
 
-        <div class="total-box">
-            <span>Total:</span>
-            <strong>${{ total | number }}</strong>
+            <!-- 🔥 CONFIRMAR -->
+            <button class="hz-btn hz-btn-primary cart-checkout-btn" (click)="checkout()">
+                Confirmar Compra
+            </button>
         </div>
-
-        <!-- 🔥 CONFIRMAR -->
-        <button class="checkout-btn" (click)="checkout()">
-            Confirmar Compra
-        </button>
-
-    </div>
+    }
 
 </div>

@@ -1,0 +1,54 @@
+<div class="home-container">
+
+  <!-- HEADER + BUSCADOR -->
+  <div class="top-shield">
+    <app-header (abrirCarrito)="abrirCarrito()"></app-header>
+
+    <div class="search-mobile-row">
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" placeholder="¿Qué buscas?" (input)="buscarProducto($event)">
+      </div>
+    </div>
+
+    <!-- FILTROS (CHIPS) con scroll horizontal -->
+    <nav class="hz-scroll-horizontal categories-section">
+      <button class="category-chip"
+        (click)="filtrarPor(0)"
+        [class.active]="categoriaSeleccionada() === 0">
+        ✨ Todos
+      </button>
+
+      @for (cat of categorias; track cat.id) {
+        <button class="category-chip"
+          (click)="filtrarPor(cat.id)"
+          [class.active]="categoriaSeleccionada() === cat.id">
+          {{ cat.icono }} {{ cat.nombre }}
+        </button>
+      }
+    </nav>
+  </div>
+
+  <!-- PRODUCTOS -->
+  <main class="products-area">
+    <div class="hz-grid">
+      @for (prod of productosFiltrados(); track prod.id) {
+        <app-product-card 
+          [producto]="prod" 
+          (agregar)="agregarAlCarrito($event)">
+        </app-product-card>
+      } @empty {
+        <div class="empty-state">
+          No se encontraron productos con esos filtros.
+        </div>
+      }
+    </div>
+  </main>
+
+  <!-- CARRITO -->
+  <app-cart
+    [visible]="carritoVisible()"
+    (cerrar)="cerrarCarrito()">
+  </app-cart>
+
+</div>

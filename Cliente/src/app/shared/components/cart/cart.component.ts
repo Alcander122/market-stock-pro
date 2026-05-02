@@ -1,11 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CarritoService } from '../../../core/services/carrito.service';
 import { PedidosService } from '../../../core/services/pedidos.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { CartItem } from '../../../models/cart-item.model';
 
 @Component({
     selector: 'app-cart',
@@ -14,27 +13,15 @@ import { CartItem } from '../../../models/cart-item.model';
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.css'
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
 
     @Input() visible: boolean = false;
     @Output() cerrar = new EventEmitter<void>();
 
-    items: CartItem[] = [];
-    total: number = 0;
-
-    constructor(
-        public carritoService: CarritoService,
-        private pedidosService: PedidosService,
-        private authService: AuthService,
-        private router: Router
-    ) { }
-
-    ngOnInit() {
-        this.carritoService.items$.subscribe(items => {
-            this.items = items;
-            this.total = this.carritoService.getTotal();
-        });
-    }
+    carritoService = inject(CarritoService);
+    private pedidosService = inject(PedidosService);
+    private authService = inject(AuthService);
+    private router = inject(Router);
 
     eliminar(index: number) {
         this.carritoService.eliminar(index);
@@ -50,7 +37,7 @@ export class CartComponent implements OnInit {
                 title: 'Inicia sesión',
                 text: 'Debes estar logueado para confirmar tu pedido.',
                 confirmButtonText: 'Ir al Login',
-                confirmButtonColor: '#2e7d32',
+                confirmButtonColor: '#2563eb',
                 showCancelButton: true,
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
@@ -63,19 +50,20 @@ export class CartComponent implements OnInit {
         }
 
         // ⚠️ VALIDAR CARRITO
-        if (this.items.length === 0) {
+        const items = this.carritoService.items();
+        if (items.length === 0) {
             Swal.fire('Carrito vacío', 'Agrega algunos productos antes de comprar.', 'warning');
             return;
         }
 
-        // 🧾 ARMAR PEDIDO (Con conversión de tipos)
+        // 🧾 ARMAR PEDIDO
         const pedido = {
-            usuarioId: Number(usuario.id), // Asegurar que el ID sea número
-            total: Number(this.total),     // Asegurar que el total sea número
-            items: this.items.map(i => ({
+            usuarioId: Number(usuario.id),
+            total: Number(this.carritoService.total()),
+            items: items.map(i => ({
                 productoId: Number(i.id),
                 cantidad: Number(i.cantidad),
-                precio: Number(i.precio) // 🔥 SOLUCIÓN: Convierte el string "3500.00" a número 3500
+                precio: Number(i.precio)
             }))
         };
 

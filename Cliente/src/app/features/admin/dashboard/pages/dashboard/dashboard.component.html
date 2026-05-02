@@ -1,0 +1,12 @@
+<app-admin-banner [vistaActual]="vistaActual" (cambiarVista)="cambiarVista($event)">
+</app-admin-banner>
+
+<app-productos-admin *ngIf="vistaActual === 'productos'" [productos]="productosFiltrados"
+    (filtrar)="filtrarPor($event)">
+</app-productos-admin>
+
+<app-pedidos-admin *ngIf="vistaActual === 'pedidos'" [pedidos]="listaPedidos" [estados]="estadosPedido"
+    (cambiarEstado)="cambiarEstadoPedido($event.id, $event.estado)">
+</app-pedidos-admin>
+
+<app-usuarios-admin *ngIf="vistaActual === 'usuarios'"></app-usuarios-admin>

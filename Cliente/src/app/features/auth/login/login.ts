@@ -40,6 +40,7 @@ export class LoginComponent {
         }
       },
       error: (err) => {
+        console.error('Detalle del error:', err);
         Swal.fire({
           icon: 'error',
           title: 'Error',

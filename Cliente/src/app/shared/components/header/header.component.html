@@ -7,19 +7,23 @@
 
         <div class="header-actions">
             <!-- SI EL USUARIO ESTÁ LOGUEADO -->
-            <div class="user-logged" *ngIf="usuario">
-                <span class="welcome-text">Hola, {{ usuario.nombreCompleto || usuario.nombre }}</span>
-                <button class="action-btn" routerLink="/historial" title="Historial">📜</button>
-                <button class="action-btn" (click)="logout()" title="Cerrar Sesión">🚪</button>
-            </div>
-
-            <!-- SI NO ESTÁ LOGUEADO -->
-            <button class="action-btn" *ngIf="!usuario" routerLink="/login" title="Ingresar">👤</button>
+            @if (usuario) {
+                <div class="user-logged">
+                    <span class="welcome-text">Hola, {{ usuario.nombreCompleto || usuario.nombre }}</span>
+                    <button class="action-btn" routerLink="/historial" title="Historial">📜</button>
+                    <button class="action-btn" (click)="logout()" title="Cerrar Sesión">🚪</button>
+                </div>
+            } @else {
+                <!-- SI NO ESTÁ LOGUEADO -->
+                <button class="action-btn" routerLink="/login" title="Ingresar">👤</button>
+            }
 
             <button class="action-btn cart-btn" (click)="abrirCarrito.emit()">
                 <div class="cart-wrapper">
                     <span class="cart-icon">🛒</span>
-                    <span class="cart-badge" *ngIf="cantidad > 0">{{ cantidad }}</span>
+                    @if (carritoService.cantidadTotal() > 0) {
+                        <span class="cart-badge">{{ carritoService.cantidadTotal() }}</span>
+                    }
                 </div>
             </button>
         </div>

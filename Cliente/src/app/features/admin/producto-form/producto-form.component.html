@@ -1,0 +1,72 @@
+<div class="modal-overlay" (click)="alCancelar.emit()">
+    <div class="form-container hz-card" (click)="$event.stopPropagation()">
+        <h2>{{ productoOriginal ? 'Editar Producto' : 'Nuevo Producto' }}</h2>
+
+        <form [formGroup]="productoForm" (ngSubmit)="guardar()">
+            <div class="field">
+                <label>Nombre del Producto</label>
+                <input formControlName="nombre" placeholder="Nombre completo" autocomplete="off">
+            </div>
+
+            <div class="row hz-grid-2-col">
+                <div class="field">
+                    <label>Precio ($)</label>
+                    <input type="number" formControlName="precioReferencia" inputmode="decimal" placeholder="0">
+                </div>
+                <div class="field">
+                    <label>Stock</label>
+                    <input type="number" formControlName="stockActual" inputmode="numeric" placeholder="0">
+                </div>
+            </div>
+
+            <div class="row hz-grid-2-col">
+                <div class="field">
+                    <label>Categoría</label>
+                    <select formControlName="categoriaId">
+                        <option value="1">🍎 Frutas</option>
+                        <option value="2">🥦 Verduras</option>
+                        <option value="4">🥛 Lácteos</option>
+                        <option value="5">🧼 Aseo</option>
+                        <option value="6">🥫 Despensa</option>
+                        <option value="3">🛍️ Abarrotes</option>
+                        <option value="7">🥩 Carnes</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Unidad de Medida</label>
+                    <input formControlName="unidadMedida" placeholder="Ej: LB, KG, UN">
+                </div>
+            </div>
+
+            <!-- SECCIÓN METADATA -->
+            <div class="metadata-section">
+                <div class="metadata-header">
+                    <label>Características / Metadatos</label>
+                    <button type="button" class="btn-add-meta" (click)="agregarMetadato()">+ Añadir Propiedad</button>
+                </div>
+                
+                <div formArrayName="metadataItems">
+                    @for (item of metadataItems.controls; track item; let i = $index) {
+                        <div class="metadata-row" [formGroupName]="i">
+                            <input formControlName="clave" placeholder="Ej. Color, Origen..." class="meta-input">
+                            <input formControlName="valor" placeholder="Ej. Rojo, Colombia..." class="meta-input">
+                            <button type="button" class="btn-remove-meta" (click)="eliminarMetadato(i)">✖</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Imagen del Producto</label>
+                <input type="file" (change)="onFileSelected($event)" accept="image/*" class="file-input">
+            </div>
+
+            <div class="actions">
+                <button type="button" class="btn-cancel" (click)="alCancelar.emit()">Cancelar</button>
+                <button type="submit" class="hz-btn hz-btn-primary" [disabled]="productoForm.invalid">
+                    {{ productoOriginal ? 'Actualizar' : 'Guardar' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="admin-orders">
+    <div class="hz-grid">
+        @for (pedido of pedidosList(); track pedido.id) {
+            <div class="hz-card admin-pedido-card">
+                <div class="pedido-header">
+                    <h4>Orden #{{ pedido.id }}</h4>
+                    <span [class]="'badge-estado ' + pedido.estado.toLowerCase()">
+                        {{ pedido.estado }}
+                    </span>
+                </div>
+                
+                <div class="pedido-body">
+                    <p class="cliente"><strong>Cliente:</strong> {{ pedido.usuario?.nombreCompleto || 'Desconocido' }}</p>
+                    <p class="total"><strong>Total:</strong> ${{ pedido.total }}</p>
+                </div>
+
+                <div class="pedido-footer">
+                    <label>Actualizar Estado:</label>
+                    <select (change)="onCambiarEstado(pedido.id, $event)">
+                        @for (est of estados; track est) {
+                            <option [value]="est" [selected]="pedido.estado === est">
+                                {{ est }}
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        } @empty {
+            <div class="empty-state">No hay pedidos registrados.</div>
+        }
+    </div>
+</div>

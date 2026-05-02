@@ -1,0 +1,71 @@
+<div class="historial-container">
+    <div class="header-historial">
+        <h2>Mis Compras</h2>
+        <button class="btn-volver" routerLink="/productos">← Volver a la tienda</button>
+    </div>
+
+    @if (cargando()) {
+    <div class="loader">Buscando tus pedidos...</div>
+    } @else {
+    <div class="grid-pedidos">
+        @for (pedido of pedidos(); track pedido.id) {
+        <div class="pedido-card shadow-sm">
+
+            <!-- CABECERA CLICKEABLE -->
+            <div class="card-header-action" (click)="togglePedido(pedido.id)">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <span class="pedido-numero">Pedido #{{ pedido.id }}</span>
+                        <div class="badge-estado" [ngClass]="pedido.estado.toLowerCase()">
+                            {{ pedido.estado }}
+                        </div>
+                    </div>
+                    <div class="pedido-monto text-end">
+                        <small>Total:</small>
+                        <div>{{ pedido.total | currency }}</div>
+                    </div>
+                </div>
+
+                <!-- STEPPER HORIZONTAL (Solo si no está cancelado) -->
+                @if (pedido.estado !== 'CANCELADO') {
+                <div class="stepper-horizontal">
+                    @for (paso of pasosStepper; track paso.label; let i = $index) {
+                    <div class="step-item" [class.active]="i <= getIndicePasoActual(pedido.estado)">
+                        <div class="step-dot">{{ paso.icon }}</div>
+                        <span class="step-text">{{ paso.label }}</span>
+                    </div>
+                    }
+                </div>
+                } @else {
+                <div class="cancelado-info">Este pedido fue cancelado.</div>
+                }
+
+                <div class="toggle-indicator">
+                    {{ pedido.expandido ? '▲ Ocultar detalle' : '▼ Ver productos' }}
+                </div>
+            </div>
+
+            <!-- DETALLE QUE SE EXPANDE -->
+            <div class="detalle-acordeon" [class.show]="pedido.expandido">
+                <div class="detalle-content">
+                    <p class="titulo-detalle">Detalle de productos:</p>
+                    <div class="lista-productos">
+                        @for (item of pedido.items; track item.id) {
+                        <div class="producto-fila">
+                            <span class="p-nombre">{{ item.producto?.nombre }}</span>
+                            <span class="p-cantidad">x{{ item.cantidad }}</span>
+                            <span class="p-subtotal">{{ (item.precioUnitario * item.cantidad) | currency }}</span>
+                        </div>
+                        }
+                    </div>
+                    <div class="fecha-footer">
+                        Realizado el: {{ pedido.creadoAt | date:'dd/MM/yyyy' }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        }
+    </div>
+    }
+</div>

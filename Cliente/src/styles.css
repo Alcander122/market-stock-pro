@@ -1,5 +1,67 @@
-main {
-    display: block;
-    padding-top: 20px; /* Ajusta este número hasta que veas el espacio que te gusta */
-    min-height: 80vh;
+/* ==========================================================================
+   HORIZON CORE - DESIGN SYSTEM (GRID REFRESH)
+   ========================================================================== */
+
+:root {
+  /* ... tus variables se mantienen iguales ... */
+  --color-primary: #2563eb;
+  --color-surface: #ffffff;
+  --color-background: #f8fafc;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --spacing-md: 1rem;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/* Grid Maestros */
+.hz-grid {
+  display: grid;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* Botones Globales (Ajuste de Radio) */
+.hz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-xl);
+  /* Botón más redondeado y moderno */
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hz-btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* ==========================================================================
+   COMPONENTES GLOBALES (UI)
+   ========================================================================== */
+
+/* Bottom Sheet / Drawer Base */
+.hz-bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-surface);
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1050;
+  visibility: hidden; /* Oculto por defecto para evitar focos accidentales */
+}
+
+.hz-bottom-sheet.open {
+  transform: translateY(0);
+  visibility: visible;
 }

@@ -1,0 +1,41 @@
+<div>
+    <div class="filters">
+        <button (click)="filtrar.emit(0)">Todos</button>
+        <button (click)="filtrar.emit(1)">🍎 Frutas</button>
+        <button (click)="filtrar.emit(2)">🥦 Verduras</button>
+        <button (click)="filtrar.emit(4)">🥛 Lácteos</button>
+        <button (click)="filtrar.emit(5)">🧼 Aseo</button>
+        <button (click)="filtrar.emit(6)">🥫 Despensa</button>
+        <button (click)="filtrar.emit(3)">🛍️ Abarrotes</button>
+        <button (click)="filtrar.emit(7)">🥩 Carnes</button>
+    </div>
+
+    <div class="product-grid">
+        @for (producto of productos; track producto.id) {
+        <div class="product-card">
+            <div class="product-image">
+                @if (producto.imagenUrl) {
+                <img [src]="producto.imagenUrl">
+                } @else {
+                <div>📦 Sin imagen</div>
+                }
+            </div>
+            <div class="product-info">
+                <h3>{{ producto.nombre }}</h3>
+                <p>Stock: {{ producto.stockActual || producto.stock }} {{ producto.unidadMedida }}</p>
+                <p class="price">${{ producto.precioReferencia }}</p>
+                <button class="btn-edit" (click)="abrirEditar(producto)">
+                    Editar Stock
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<!-- ✅ El modal se activa con el Signal mostrarModal -->
+@if (mostrarModal()) {
+<app-producto-form [productoOriginal]="productoSeleccionado()" (alTerminar)="guardarCambios($event)"
+    (alCancelar)="cerrarModal()">
+</app-producto-form>
+}

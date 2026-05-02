@@ -1,0 +1,42 @@
+<div class="auth-wrapper">
+    <div class="auth-card hz-card">
+        <div class="auth-header">
+            <h2>Crear una Cuenta</h2>
+            <p>Únete a Fruver y gestiona tus compras</p>
+        </div>
+
+        <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+            <div class="field">
+                <label>Nombre Completo</label>
+                <input formControlName="nombreCompleto" placeholder="Ej. Juan Pérez" autocomplete="name">
+                <small *ngIf="registroForm.get('nombreCompleto')?.invalid && registroForm.get('nombreCompleto')?.touched" class="text-error">
+                    El nombre debe tener al menos 3 caracteres.
+                </small>
+            </div>
+
+            <div class="field">
+                <label>Correo Electrónico</label>
+                <input type="email" formControlName="email" placeholder="ejemplo@correo.com" autocomplete="email">
+                <small *ngIf="registroForm.get('email')?.invalid && registroForm.get('email')?.touched" class="text-error">
+                    Ingresa un correo válido.
+                </small>
+            </div>
+
+            <div class="field">
+                <label>Contraseña</label>
+                <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+                <small *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched" class="text-error">
+                    La contraseña debe tener al menos 6 caracteres.
+                </small>
+            </div>
+
+            <button type="submit" class="hz-btn hz-btn-primary full-width" [disabled]="registroForm.invalid">
+                Registrarse
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+</div>

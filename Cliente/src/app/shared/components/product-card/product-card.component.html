@@ -1,0 +1,27 @@
+<div class="hz-card">
+  <div class="hz-card-image-wrapper">
+    @if (producto.imagenUrl) {
+    <img [src]="producto.imagenUrl" [alt]="producto.nombre" class="hz-card-image" loading="lazy">
+    } @else {
+    <div class="hz-card-image skeleton"></div>
+    }
+  </div>
+
+  <div class="hz-card-content">
+    <div class="hz-card-header">
+      <h3 class="hz-card-title">{{ producto.nombre }}</h3>
+      <span class="hz-badge-success">Disponible</span>
+    </div>
+
+    <div class="hz-card-price">
+      <span class="currency">$</span>
+      <span class="amount">{{ producto.precioReferencia | number:'1.0-0' }}</span>
+    </div>
+
+    <div class="hz-card-actions">
+      <button class="hz-btn hz-btn-primary full-width" (click)="agregar.emit(producto)">
+        Añadir al Carrito
+      </button>
+    </div>
+  </div>
+</div>

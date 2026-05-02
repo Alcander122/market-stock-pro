@@ -1,0 +1,37 @@
+<div class="perfil-wrapper">
+    <div class="perfil-card hz-card">
+        <div class="perfil-header">
+            <h2>Mi Perfil</h2>
+            <p>Gestiona tu información personal y de acceso</p>
+        </div>
+
+        <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()">
+            <div class="field">
+                <label>Nombre Completo</label>
+                <input formControlName="nombreCompleto">
+            </div>
+
+            <div class="field">
+                <label>Correo Electrónico</label>
+                <input type="email" formControlName="email">
+            </div>
+
+            <div class="field">
+                <label>Nueva Contraseña <span class="text-muted">(Opcional)</span></label>
+                <input type="password" formControlName="password" placeholder="Déjala en blanco para mantener la actual">
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="hz-btn hz-btn-primary" [disabled]="perfilForm.invalid">Guardar Cambios</button>
+            </div>
+        </form>
+
+        <hr class="divider">
+
+        <div class="danger-zone">
+            <h3>Zona de Peligro</h3>
+            <p>Una vez que elimines tu cuenta, no hay vuelta atrás. Por favor, asegúrate de estar seguro.</p>
+            <button type="button" class="btn-danger" (click)="eliminarCuenta()">Eliminar Cuenta</button>
+        </div>
+    </div>
+</div>

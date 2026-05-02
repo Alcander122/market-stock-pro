@@ -1,0 +1,67 @@
+.admin-orders {
+    padding: var(--spacing-md);
+}
+
+.admin-pedido-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: var(--spacing-sm);
+}
+
+.pedido-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-text-primary);
+}
+
+.pedido-body p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
+.pedido-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: auto;
+}
+
+.pedido-footer label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+}
+
+.pedido-footer select {
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0,0,0,0.1);
+    font-family: inherit;
+    width: 100%;
+}
+
+/* Badges de estado */
+.badge-estado {
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-estado.pendiente { background: #fff3e0; color: #ef6c00; }
+.badge-estado.preparando { background: #e3f2fd; color: #1565c0; }
+.badge-estado.enviado { background: #e8eaf6; color: #3f51b5; }
+.badge-estado.entregado { background: #e8f5e9; color: #2e7d32; }
+.badge-estado.cancelado { background: #f8d7da; color: #721c24; }

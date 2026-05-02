@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { Home as HomeComponent } from './features/home/home';
+import { Home as HomeComponent } from './features/shop/home/home';
+import { DashboardComponent } from './features/admin/dashboard/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
@@ -14,16 +14,32 @@ export const routes: Routes = [
     {
         path: 'login',
         loadComponent: () =>
-            import('../app/features/auth/login/login')
+            import('./features/auth/login/login')
                 .then(m => m.LoginComponent)
+    },
+    
+    // 📝 REGISTRO
+    {
+        path: 'registro',
+        loadComponent: () =>
+            import('./features/auth/registro/registro.component')
+                .then(m => m.RegistroComponent)
     },
 
     // 📜 HISTORIAL DE COMPRAS
     {
         path: 'historial',
         loadComponent: () =>
-            import('./features/historial/historial.component')
+            import('./features/shop/historial/historial.component')
                 .then(m => m.HistorialComponent)
+    },
+    
+    // 👤 PERFIL
+    {
+        path: 'perfil',
+        loadComponent: () =>
+            import('./features/shop/perfil/perfil.component')
+                .then(m => m.PerfilComponent)
     },
 
     // 🚫 FALLBACK
