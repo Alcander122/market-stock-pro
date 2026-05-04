@@ -27,6 +27,8 @@ export class PerfilComponent implements OnInit {
     this.perfilForm = this.fb.group({
       nombreCompleto: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      telefono: ['', Validators.required],
+      direccion: ['', Validators.required],
       password: [''] // Opcional, solo si quiere cambiarla
     });
   }
@@ -39,8 +41,14 @@ export class PerfilComponent implements OnInit {
     }
     this.perfilForm.patchValue({
       nombreCompleto: this.usuarioActual.nombreCompleto,
-      email: this.usuarioActual.email
+      email: this.usuarioActual.email,
+      telefono: this.usuarioActual.telefono || '',
+      direccion: this.usuarioActual.direccion || ''
     });
+  }
+
+  goBack() {
+    window.history.back();
   }
 
   guardarCambios() {

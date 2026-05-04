@@ -105,3 +105,30 @@
 .btn-danger:hover {
     background-color: #c53030;
 }
+
+.btn-back {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: var(--spacing-md);
+    padding: 0;
+    transition: color 0.3s;
+}
+
+.btn-back:hover {
+    color: var(--color-primary-dark, #2b6a2e);
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .perfil-card {
+        padding: var(--spacing-md);
+    }
+    
+    .perfil-wrapper {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+}

@@ -1,5 +1,6 @@
 <div class="perfil-wrapper">
     <div class="perfil-card hz-card">
+        <button class="btn-back" (click)="goBack()">&#8592; Volver</button>
         <div class="perfil-header">
             <h2>Mi Perfil</h2>
             <p>Gestiona tu información personal y de acceso</p>
@@ -14,6 +15,16 @@
             <div class="field">
                 <label>Correo Electrónico</label>
                 <input type="email" formControlName="email">
+            </div>
+
+            <div class="field">
+                <label>Teléfono</label>
+                <input type="tel" formControlName="telefono" placeholder="Ej. 3001234567">
+            </div>
+
+            <div class="field">
+                <label>Dirección</label>
+                <input formControlName="direccion" placeholder="Ej. Calle 123 # 45-67">
             </div>
 
             <div class="field">

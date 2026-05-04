@@ -81,4 +81,60 @@ export class UsuariosAdminComponent implements OnInit {
       }
     });
   }
+
+  crearUsuario() {
+    Swal.fire({
+      title: 'Crear Nuevo Usuario',
+      html: `
+        <div style="display:flex; flex-direction:column; gap:15px; text-align:left; margin-top: 15px;">
+            <input id="swal-nombre" class="swal2-input" style="margin:0; width:100%; box-sizing: border-box;" placeholder="Nombre completo">
+            <input id="swal-email" type="email" class="swal2-input" style="margin:0; width:100%; box-sizing: border-box;" placeholder="Correo electrónico">
+            <input id="swal-password" type="password" class="swal2-input" style="margin:0; width:100%; box-sizing: border-box;" placeholder="Contraseña">
+            <input id="swal-telefono" type="tel" class="swal2-input" style="margin:0; width:100%; box-sizing: border-box;" placeholder="Teléfono">
+            <input id="swal-direccion" class="swal2-input" style="margin:0; width:100%; box-sizing: border-box;" placeholder="Dirección">
+            <select id="swal-rol" class="swal2-select" style="margin:0; width:100%; box-sizing: border-box; display: flex;">
+                <option value="cliente">Cliente</option>
+                <option value="admin">Administrador</option>
+            </select>
+        </div>
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Crear',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        const nombreCompleto = (document.getElementById('swal-nombre') as HTMLInputElement).value;
+        const email = (document.getElementById('swal-email') as HTMLInputElement).value;
+        const password = (document.getElementById('swal-password') as HTMLInputElement).value;
+        const telefono = (document.getElementById('swal-telefono') as HTMLInputElement).value;
+        const direccion = (document.getElementById('swal-direccion') as HTMLInputElement).value;
+        const rol = (document.getElementById('swal-rol') as HTMLSelectElement).value;
+
+        if (!nombreCompleto || !email || !password || !telefono || !direccion) {
+          Swal.showValidationMessage('Todos los campos son obligatorios');
+          return false;
+        }
+
+        return { nombreCompleto, email, password, telefono, direccion, rol };
+      }
+    }).then((result) => {
+      if (result.isConfirmed && result.value) {
+        this.http.post(this.api, result.value).subscribe({
+          next: () => {
+            Swal.fire('Creado', 'Usuario creado con éxito', 'success');
+            this.cargarUsuarios();
+          },
+          error: (err) => {
+            console.error('Error creando usuario', err);
+            let errMsg = 'No se pudo crear el usuario';
+            if (err.error && err.error.message) {
+              errMsg = Array.isArray(err.error.message) ? err.error.message.join(', ') : err.error.message;
+            }
+            Swal.fire('Error', errMsg, 'error');
+          }
+        });
+      }
+    });
+  }
 }
+

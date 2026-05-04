@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 
@@ -32,6 +32,8 @@ export class DashboardComponent implements OnInit {
 
     vistaActual: 'productos' | 'pedidos' | 'usuarios' = 'productos';
 
+    @ViewChild(ProductosAdminComponent) productosAdmin!: ProductosAdminComponent;
+
     listaProductos: Producto[] = [];
     productosFiltrados: Producto[] = [];
 
@@ -46,6 +48,12 @@ export class DashboardComponent implements OnInit {
 
     cambiarVista(v: 'productos' | 'pedidos' | 'usuarios') {
         this.vistaActual = v;
+    }
+
+    abrirModalProducto() {
+        if (this.productosAdmin) {
+            this.productosAdmin.abrirNuevo();
+        }
     }
 
     cargarProductos() {

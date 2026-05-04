@@ -51,26 +51,25 @@ button {
 @media (max-width: 600px) {
   .nav-layout {
     flex-direction: column;
-    /* Apila el logo y las acciones si es necesario */
     padding: 10px;
+    gap: 15px;
+  }
+
+  .header-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
   }
 
   .welcome-text {
     display: block;
-    /* Asegura que no esté oculto */
     font-size: 0.8rem;
-    /* Un poco más pequeño para que quepa */
     margin-right: 5px;
     white-space: nowrap;
-    /* Evita que el nombre se parta en dos líneas */
     overflow: hidden;
     text-overflow: ellipsis;
-    /* Si el nombre es muy largo, pone "..." */
     max-width: 100px;
-  }
-
-  .header-actions {
-    gap: 8px;
-    /* Reduce el espacio entre iconos */
   }
 }

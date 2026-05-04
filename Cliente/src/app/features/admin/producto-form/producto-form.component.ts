@@ -68,6 +68,11 @@ export class ProductoFormComponent implements OnInit {
             formValue.metadata = metadataObj;
             delete formValue.metadataItems;
 
+            // ✅ Convertir a números para que NestJS (ValidationPipe) los acepte
+            formValue.precioReferencia = Number(formValue.precioReferencia);
+            formValue.stockActual = Number(formValue.stockActual);
+            formValue.categoriaId = Number(formValue.categoriaId);
+
             this.alTerminar.emit({ datos: formValue, archivo: this.archivoSeleccionado });
         }
     }

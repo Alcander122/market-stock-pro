@@ -70,3 +70,32 @@
     text-align: center;
     margin-top: 5px;
 }
+
+.btn-back {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: var(--spacing-sm);
+    padding: 0;
+    text-align: left;
+    align-self: flex-start;
+    transition: color 0.3s;
+}
+
+.btn-back:hover {
+    color: var(--color-primary-dark, #2b6a2e);
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .login-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .login-wrapper {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+}

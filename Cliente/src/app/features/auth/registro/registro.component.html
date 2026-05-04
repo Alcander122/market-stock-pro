@@ -23,6 +23,22 @@
             </div>
 
             <div class="field">
+                <label>Teléfono</label>
+                <input type="tel" formControlName="telefono" placeholder="Ej. 3001234567" autocomplete="tel">
+                <small *ngIf="registroForm.get('telefono')?.invalid && registroForm.get('telefono')?.touched" class="text-error">
+                    El teléfono es obligatorio.
+                </small>
+            </div>
+
+            <div class="field">
+                <label>Dirección</label>
+                <input formControlName="direccion" placeholder="Ej. Calle 123 # 45-67" autocomplete="street-address">
+                <small *ngIf="registroForm.get('direccion')?.invalid && registroForm.get('direccion')?.touched" class="text-error">
+                    La dirección es obligatoria.
+                </small>
+            </div>
+
+            <div class="field">
                 <label>Contraseña</label>
                 <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
                 <small *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched" class="text-error">

@@ -1,6 +1,7 @@
 <div class="login-wrapper">
     <!-- Tarjeta central de inicio de sesión -->
     <div class="login-card">
+        <button class="btn-back" routerLink="/">&#8592; Volver al Inicio</button>
         <h2 class="login-title">Iniciar Sesión</h2>
 
         <div class="form-group">
@@ -17,6 +18,10 @@
         <button class="hz-btn hz-btn-primary full-width" (click)="login()">
             Ingresar
         </button>
+
+        <p class="text-center" style="margin-top: 1rem; color: #666; text-align: center;">
+            ¿No tienes cuenta? <a routerLink="/registro" style="color: var(--primary-color); font-weight: bold; text-decoration: none; cursor: pointer;">Regístrate aquí</a>
+        </p>
 
         <!-- Mensaje de error dinámico -->
         <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>

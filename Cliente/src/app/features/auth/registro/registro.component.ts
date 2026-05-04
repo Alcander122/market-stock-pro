@@ -23,7 +23,9 @@ export class RegistroComponent {
     this.registroForm = this.fb.group({
       nombreCompleto: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      telefono: ['', [Validators.required]],
+      direccion: ['', [Validators.required]]
     });
   }
 

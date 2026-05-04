@@ -10,6 +10,7 @@
             @if (usuario) {
                 <div class="user-logged">
                     <span class="welcome-text">Hola, {{ usuario.nombreCompleto || usuario.nombre }}</span>
+                    <button class="action-btn" routerLink="/perfil" title="Perfil">👤</button>
                     <button class="action-btn" routerLink="/historial" title="Historial">📜</button>
                     <button class="action-btn" (click)="logout()" title="Cerrar Sesión">🚪</button>
                 </div>
